@@ -5,12 +5,6 @@ resources:
     uri: https://github.com/poornima-krishnasamy/cloud-platform-environments.git
     branch: main
     git_crypt_key: ((cloud-platform-environments-git-crypt.key))
-  source:
-    repository: poornima-krishnasamy/cloud-platform-environments
-    access_token: ((cloud-platform-environments-pr-git-access-token))
-    git_crypt_key: ((cloud-platform-environments-git-crypt.key))
-    paths:
-    - namespaces/cp-2501-1602.cloud-platform.service.justice.gov.uk
 - name: pipeline-tools-image
   type: docker-image
   source:
@@ -35,10 +29,10 @@ resource_types:
 groups:
 - name: environments-terraform
   jobs:
-    - plan-live-1
+    - apply-live-1
 
 jobs:
-  - name: plan-live-1
+  - name: apply-live-1
     serial: true
     plan:
       - in_parallel:
@@ -63,7 +57,7 @@ jobs:
             PINGDOM_PASSWORD: ((cloud-platform-environments-pingdom.pingdom_password))
             PINGDOM_API_KEY: ((cloud-platform-environments-pingdom.pingdom_api_key))
             # the variables prefixed with PIPELINE_ are used by the plan script
-            PIPELINE_CLUSTER: cp-2501-1602.cloud-platform.service .justice.gov.uk
+            PIPELINE_CLUSTER: cp-2501-1602.cloud-platform.service.justice.gov.uk
             PIPELINE_STATE_BUCKET: cloud-platform-terraform-state
             PIPELINE_STATE_KEY_PREFIX: "cloud-platform-environments/"
             PIPELINE_STATE_REGION: "eu-west-1"
@@ -85,5 +79,5 @@ jobs:
                   aws s3 cp s3://cp-1501-1106-concourse-kubeconfig/kubeconfig /tmp/kubeconfig
                 )
                 bundle install --without development test
-                ./bin/plan
+                ./bin/apply
 
