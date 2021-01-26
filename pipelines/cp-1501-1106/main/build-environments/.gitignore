@@ -1,4 +1,6 @@
-*.pyc
+.terraform/
+.helm-config/
+terraform.tfstate.d/
 
 #  Local .terraform directories
 **/.terraform/*
@@ -38,4 +40,3 @@ Temporary Items
 
 # Ignore IDEs
 .idea/
-
