@@ -36,6 +36,7 @@ data "template_file" "contexts" {
 }
 
 resource "aws_s3_bucket" "kubeconfig" {
+  # This is the cluster to which the environment is created(cp-2501-1602). Misnamed to EKS where the concourse is
   bucket = "cp-1501-1106-concourse-kubeconfig"
   acl    = "private"
 
