@@ -2,7 +2,7 @@ terraform {
   backend "s3" {
     bucket = "cloud-platform-terraform-state"
     region = "eu-west-1"
-    key    = "concourse-pipelines/live-1/main/build-environments/terraform.tfstate"
+    key    = "concourse-pipelines/cp-2501-1602/main/build-environments/terraform.tfstate"
   }
 }
 
